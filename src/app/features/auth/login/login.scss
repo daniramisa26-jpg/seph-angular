@@ -191,3 +191,64 @@
 
   object-fit: contain;
 }
+
+.password-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 22px;
+}
+
+.password-container input {
+  width: 100%;
+
+  height: 35px;
+
+  padding-right: 50px;
+
+  margin-bottom: 0;
+
+  box-sizing: border-box;
+}
+
+.toggle-password {
+   position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 24px !important;
+  height: 24px !important;
+
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #6f6f6f;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  z-index: 2;
+}
+
+.toggle-password:hover {
+  color: #65122e;
+}
+
+.material-symbols-outlined {
+  font-size: 20px;
+}
+
+/* Oculta el icono nativo de mostrar contraseña del navegador */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+/* Oculta botones automáticos del navegador en algunos inputs */
+input::-webkit-credentials-auto-fill-button,
+input::-webkit-password-toggle-button {
+  display: none !important;
+}
+

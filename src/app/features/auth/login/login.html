@@ -26,12 +26,24 @@
       <input
         type="email"
         [(ngModel)]="form.email">
+<label>Contraseña</label>
 
-      <label>Contraseña</label>
-      <input
-        type="password"
-        [(ngModel)]="form.password">
+<div class="password-container">
+  <input
+    [type]="mostrarPassword ? 'text' : 'password'"
+    [(ngModel)]="form.password">
 
+  <button
+    type="button"
+    class="toggle-password"
+    (click)="togglePassword()">
+
+    <span class="material-symbols-outlined">
+      {{ mostrarPassword ? 'visibility_off' : 'visibility' }}
+    </span>
+
+  </button>
+</div>
       <button
         (click)="login()"
         [disabled]="loading()">

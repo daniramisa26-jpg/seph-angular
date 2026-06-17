@@ -38,4 +38,9 @@ export class LoginComponent {
 }
     });
   }
+  mostrarPassword = false;
+
+togglePassword(): void {
+  this.mostrarPassword = !this.mostrarPassword;
+}
 }
