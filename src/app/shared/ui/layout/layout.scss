@@ -70,11 +70,17 @@ main {
     gap: 1.5rem;
     flex-wrap: wrap;
 
-    a {
+  a,
+    .header-main__logout {
       color: white;
       text-decoration: none;
       font-size: 1rem;
       white-space: nowrap;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      font-family: inherit;
 
       &:hover {
         text-decoration: underline;

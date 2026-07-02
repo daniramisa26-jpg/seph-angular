@@ -174,3 +174,43 @@
 .step p {
   margin: 0;
 }
+
+/**
+ * Estilo aplicado a los botones
+ * de navegación mientras se
+ * ejecuta un proceso de guardado.
+ *
+ * Evita múltiples clics y
+ * comunica visualmente que
+ * la operación continúa.
+ */
+.btn-nav:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-wrapper {
+  overflow: visible;
+}
+
+.notification {
+  margin: 14px auto 12px;
+  padding: 9px 14px;
+  max-width: 620px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.notification.success {
+  background: #eaf7ee;
+  color: #1f7a3a;
+  border: 1px solid #23b64b;
+}
+
+.notification.error {
+  background: #fdecec;
+  color: #9b1c1c;
+  border: 1px solid #d93025;
+}

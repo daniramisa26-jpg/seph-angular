@@ -1,9 +1,15 @@
+<!-- Contenedor principal del módulo.
+Organiza la vista en: Menú lateral - Contenido del formulario -->
 <div class="page">
 
+  <!-- Menú lateral del registro. Permite:
+    - Navegar entre pasos
+    - Mostrar progreso -->
   <aside
     class="sidebar"
     [class.sidebar-collapsed]="menuCollapsed">
 
+    <!-- Cambia el estado del menú: expandido / colapsado. -->
     <button
       class="hamburger"
       type="button"
@@ -11,6 +17,8 @@
       ☰
     </button>
 
+    <!-- Título del módulo. Se oculta cuando
+    el menú está colapsado. -->
     <div
       class="sidebar-title"
       *ngIf="!menuCollapsed">
@@ -20,6 +28,8 @@
 
     </div>
 
+    <!-- Navegación entre formularios.
+    Se habilita según el avance del usuario. -->
     <nav
       class="menu"
       *ngIf="!menuCollapsed">
@@ -30,6 +40,8 @@
         Inicio
       </a>
 
+      <!-- Paso 1. Estados:
+      active-actual completed-completado -->
       <a
         class="menu-item"
         [class.active]="currentStep === 1"
@@ -40,6 +52,7 @@
 
       </a>
 
+      <!-- Paso 2. Solo disponible cuando paso 1 termina. -->
       <a
         class="menu-item"
         [class.active]="currentStep === 2"
@@ -54,12 +67,18 @@
 
   </aside>
 
+  <!-- Área principal del formulario. -->
   <main
     class="content"
     [class.content-expanded]="menuCollapsed">
 
     <section class="form-wrapper">
 
+      <!-- Encabezado del flujo.
+      Contiene:
+      - Navegación
+      - Stepper
+      - Acciones -->
       <div class="top-actions">
 
         <button
@@ -71,6 +90,7 @@
 
         </button>
 
+        <!-- Indicador visual del avance. -->
         <div class="steps">
 
           <div
@@ -88,6 +108,7 @@
 
           </div>
 
+          <!-- Línea visual entre pasos. -->
           <div
             class="step-line"
             [class.completed]="currentStep === 2">
@@ -107,16 +128,22 @@
 
         </div>
 
+        <!-- Botón del paso 1.
+        Ejecuta nextStep(), que a su vez llama
+        al método saveEmployee() del componente hijo. -->
         <button
           class="btn-nav"
           type="button"
+          [disabled]="isSaving"
           (click)="nextStep()"
           *ngIf="currentStep === 1">
 
-          Siguiente
+          {{ isSaving ? 'Guardando...' : 'Guardar' }}
 
         </button>
 
+        <!-- Botón del paso 2.
+        Ejecuta el guardado del historial contractual. -->
         <button
           class="btn-nav"
           type="button"
@@ -129,12 +156,30 @@
 
       </div>
 
+      <!-- Mensaje central del formulario.
+      Se utiliza para mostrar avisos de éxito o error
+      controlados desde el componente padre. -->
+      <div
+        class="notification"
+        [class.success]="notificationType === 'success'"
+        [class.error]="notificationType === 'error'"
+        *ngIf="notificationMessage">
+
+        {{ notificationMessage }}
+
+      </div>
+
+      <!-- Paso 1. Captura la información personal. -->
       <app-personal-information
         *ngIf="currentStep === 1">
       </app-personal-information>
 
+      <!-- Paso 2. Captura el historial de contrato.
+      Recibe el id del empleado registrado en el paso 1. -->
       <app-contract-history
-        *ngIf="currentStep === 2">
+        #contractHistoryComponent
+        *ngIf="currentStep === 2"
+        [employeeId]="employeeId">
       </app-contract-history>
 
     </section>

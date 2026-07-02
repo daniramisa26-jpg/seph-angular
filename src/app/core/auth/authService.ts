@@ -53,30 +53,28 @@ export class AuthService {
    * Verifica la existencia del token y del usuario.
    * Si hay algun error al leer la sesión ocurre un error.
    */
-  private restoreSession() {
-    const token = localStorage.getItem('accessToken');
-    const userJson = localStorage.getItem('currentUser');
+private restoreSession() {
+  const token = localStorage.getItem('accessToken');
+  const userJson = localStorage.getItem('currentUser');
 
-    if (token && userJson) {
-      try {
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        const isExpired = payload.exp * 1000 < Date.now();
+  if (token && userJson) {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const isExpired = payload.exp * 1000 < Date.now();
 
-        if (isExpired) {
-          const user = JSON.parse(userJson);
-          this.currentUser.set(user);
-          this.isAuthenticated.set(true);
-          return;
-        }
+      const user = JSON.parse(userJson);
+      this.currentUser.set(user);
+      this.isAuthenticated.set(true);
 
-        const user = JSON.parse(userJson);
-        this.currentUser.set(user);
-        this.isAuthenticated.set(true);
-      } catch {
-        this.clearSession();
+      if (isExpired) {
+        return;
       }
+
+    } catch {
+      this.clearSession();
     }
   }
+}
 
   /**
    * Envía las credenciales al servidor para iniciar sesión.

@@ -80,3 +80,21 @@
   color: #555555;
   cursor: not-allowed;
 }
+
+.notification {
+  margin-bottom: 6px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.notification.success {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.notification.error {
+  background: #fee2e2;
+  color: #991b1b;
+}
