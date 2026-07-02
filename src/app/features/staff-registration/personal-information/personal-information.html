@@ -1,10 +1,47 @@
+<!--
+  Notificación visual del formulario.
+
+  Se muestra únicamente cuando existe
+  un mensaje en notificationMessage.
+
+  Las clases success y error cambian
+  según el tipo de respuesta obtenida.
+-->
+<div
+  class="notification"
+  [class.success]="notificationType === 'success'"
+  [class.error]="notificationType === 'error'"
+  *ngIf="notificationMessage">
+
+  {{ notificationMessage }}
+
+</div>
+
+<!--
+  Formulario encargado de capturar
+  la información personal del empleado.
+
+  La información capturada se almacena
+  temporalmente en employee.
+
+  Posteriormente será enviada
+  al backend mediante saveEmployee().
+-->
 <form class="form-card">
-    <h2>Datos Personales</h2>
+  <h2>Datos Personales</h2>
 
   <div class="form-content">
 
     <div class="form-grid personal-grid">
 
+      <!--
+        Tarjeta izquierda del formulario.
+
+        Contiene los datos principales:
+        - Nombre
+        - Apellido materno
+        - Apellido paterno
+      -->
       <div class="field-card large">
         <label>Nombres (s)</label>
         <input
@@ -28,7 +65,22 @@
         />
       </div>
 
+      <!--
+        Columna derecha del formulario.
+
+        Contiene:
+        - CURP
+        - Sexo
+      -->
       <div class="right-column">
+
+        <!--
+          Campo CURP.
+
+          Este dato se enviará al backend,
+          donde se valida que no exista
+          otro empleado con la misma CURP.
+        -->
         <div class="field-card">
           <label>CURP</label>
           <input
@@ -38,21 +90,40 @@
           />
         </div>
 
+        <!--
+          Select dinámico de Sexo.
+
+          Obtiene las opciones desde
+          CatalogService mediante el arreglo sexes.
+        -->
         <div class="field-card">
           <label>Sexo</label>
-        <select
-  name="idSexo"
-  [(ngModel)]="employee.idSexo"
->
-  <option [ngValue]="0">Seleccione</option>
 
-  @for (sex of sexes; track sex.id) {
-    <option [ngValue]="sex.id">
-      {{ sex.strValor }}
-    </option>
-  }
-</select>
+          <select
+            name="idSexo"
+            [(ngModel)]="employee.idSexo">
+
+            <!--
+              Valor inicial del select.
+            -->
+            <option [ngValue]="0">Seleccione</option>
+
+            <!--
+              Recorre el catálogo de sexos
+              recibido desde el backend.
+
+              track sex.id ayuda a Angular
+              a optimizar el renderizado.
+            -->
+            @for (sex of sexes; track sex.id) {
+              <option [ngValue]="sex.id">
+                {{ sex.strValor }}
+              </option>
+            }
+
+          </select>
         </div>
+
       </div>
 
     </div>

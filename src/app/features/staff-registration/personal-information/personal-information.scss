@@ -1,3 +1,9 @@
+/*
+ * Contenedor principal del formulario.
+ * Define el tamaño, borde y sombra
+ * de la tarjeta donde se capturan
+ * los datos personales.
+ */
 .form-card {
   margin-top: 18px;
   width: 100%;
@@ -5,21 +11,40 @@
   border: 1px solid #222222;
   border-radius: 8px;
   padding: 9px;
-  box-shadow: 0 0 10px rgba(0,0,0,.35);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .35);
   overflow: hidden;
 }
 
+/*
+ * Título del formulario.
+ */
 .form-card h2 {
   margin: 0 0 10px;
   font-size: 15px;
   font-weight: 500;
 }
 
+/*
+ * Contenedor interno del formulario.
+ * Evita que aparezcan barras
+ * de desplazamiento.
+ */
 .form-content {
   height: calc(100% - 34px);
   overflow: hidden;
 }
 
+/*
+ * Distribución principal
+ * de los campos mediante Grid.
+ *
+ * Lado izquierdo:
+ * - Nombres y apellidos.
+ *
+ * Lado derecho:
+ * - CURP.
+ * - Sexo.
+ */
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -29,36 +54,66 @@
   gap: 18px 35px;
 }
 
+/*
+ * Área correspondiente
+ * a los nombres.
+ */
 .large {
   grid-area: nombres;
 }
 
+/*
+ * Permite que los elementos hijos
+ * ocupen directamente las áreas
+ * definidas por el Grid.
+ */
 .right-column {
   display: contents;
 }
 
+/*
+ * Primer elemento de la columna derecha.
+ * Corresponde al campo CURP.
+ */
 .right-column .field-card:nth-child(1) {
   grid-area: curp;
 }
 
+/*
+ * Segundo elemento de la columna derecha.
+ * Corresponde al campo Sexo.
+ */
 .right-column .field-card:nth-child(2) {
   grid-area: sexo;
 }
 
+/*
+ * Tarjeta individual utilizada
+ * para agrupar cada conjunto
+ * de controles.
+ */
 .field-card {
   background: #ffffff;
   border: 1px solid #dddddd;
   border-radius: 10px;
   padding: 14px 18px;
-  box-shadow: 0 3px 5px rgba(0,0,0,.25);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .25);
 }
 
+/*
+ * Etiquetas de los controles.
+ */
 .field-card label {
   display: block;
   font-size: 11px;
   margin-bottom: 5px;
 }
 
+/*
+ * Estilo compartido para
+ * cajas de texto y listas
+ * desplegables.
+ */
 .field-card input,
 .field-card select {
   width: 100%;
@@ -68,4 +123,43 @@
   background: #d9d9d9;
   margin-bottom: 10px;
   padding: 0 8px;
+}
+
+/*
+ * Contenedor de la notificación.
+ *
+ * Muestra mensajes de éxito o error
+ * después de intentar guardar
+ * la información del empleado.
+ */
+.notification {
+  width: 100%;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/*
+ * Estilo aplicado cuando
+ * la operación se realizó
+ * correctamente.
+ */
+.notification.success {
+  background: #e6f4ea;
+  color: #137333;
+  border: 1px solid #137333;
+}
+
+/*
+ * Estilo aplicado cuando
+ * ocurre algún error,
+ * por ejemplo una CURP
+ * previamente registrada.
+ */
+.notification.error {
+  background: #fce8e6;
+  color: #b3261e;
+  border: 1px solid #b3261e;
 }
